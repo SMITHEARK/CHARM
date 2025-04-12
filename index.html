@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMITHE Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #ffd700;
+            --dark-color: #2c3e50;
+            --light-color: #f5f7fa;
+            --success-color: #2ecc71;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .calculator {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .calculator:hover {
+            transform: translateY(-5px);
+        }
+        
+        .calculator h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .input-group select, 
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        button:hover {
+            background-color: #3a5a80;
+        }
+        
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-right: 4px solid var(--secondary-color);
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .result-item .label {
+            font-weight: bold;
+        }
+        
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .summary {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .summary h3 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SMITHE</h1>
+            <p>Comprehensive Upgrade Calculator</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="calculator-grid">
+            <div class="calculator">
+                <h2>Chief CHARM Calculator</h2>
+                <div class="input-group">
+                    <label for="charm-level">Select Level:</label>
+                    <select id="charm-level">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3">Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                        <option value="6">Level 6</option>
+                        <option value="7">Level 7</option>
+                        <option value="8">Level 8</option>
+                        <option value="9">Level 9</option>
+                        <option value="10">Level 10</option>
+                        <option value="11">Level 11</option>
+                        <option value="12">Level 12</option>
+                        <option value="13">Level 13</option>
+                        <option value="14">Level 14</option>
+                        <option value="15">Level 15</option>
+                        <option value="16">Level 16</option>
+                    </select>
+                </div>
+                <button onclick="calculateCharm()">Calculate</button>
+                <div class="results" id="charm-results">
+                    <div class="result-item">
+                        <span class="label">Guide Cost:</span>
+                        <span class="highlight" id="charm-guide-cost">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Design Cost:</span>
+                        <span class="highlight" id="charm-design-cost">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Charm Secrets:</span>
+                        <span class="highlight" id="charm-secrets">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Stat Total:</span>
+                        <span class="highlight" id="charm-stat">-</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="calculator">
+                <h2>Star Yield Calculator</h2>
+                <div class="tabs">
+                    <div class="tab active" data-tab="income">Star Yield</div>
+                    <div class="tab" data-tab="development">Governor Meter</div>
+                </div>
+                
+                <div class="tab-content active" id="income-tab">
+                    <div class="input-group">
+                        <label for="income-level">Select Level:</label>
+                        <select id="income-level">
+                            <option value="0">Level 0 (Group 1)</option>
+                            <option value="1">Level 1 (Group 1)</option>
+                            <option value="2">Level 2 (Group 1)</option>
+                            <option value="3">Level 3 (Group 1)</option>
+                            <option value="4">Level 0 (Group 2)</option>
+                            <option value="5">Level 1 (Group 2)</option>
+                            <option value="6">Level 2 (Group 2)</option>
+                            <option value="7">Level 3 (Group 2)</option>
+                            <option value="8">Level 0 (Group 3)</option>
+                            <option value="9">Level 1 (Group 3)</option>
+                            <option value="10">Level 2 (Group 3)</option>
+                            <option value="11">Level 3 (Group 3)</option>
+                            <option value="12">Level 0 (Group 4)</option>
+                            <option value="13">Level 1 (Group 4)</option>
+                            <option value="14">Level 2 (Group 4)</option>
+                            <option value="15">Level 3 (Group 4)</option>
+                            <option value="16">Level 0 (Group 5)</option>
+                            <option value="17">Level 1 (Group 5)</option>
+                            <option value="18">Level 2 (Group 5)</option>
+                            <option value="19">Level 3 (Group 5)</option>
+                            <option value="20">Level 0 (Group 6)</option>
+                            <option value="21">Level 1 (Group 6)</option>
+                            <option value="22">Level 2 (Group 6)</option>
+                            <option value="23">Level 3 (Group 6)</option>
+                            <option value="24">Level 0 (Group 7)</option>
+                            <option value="25">Level 1 (Group 7)</option>
+                            <option value="26">Level 2 (Group 7)</option>
+                            <option value="27">Level 3 (Group 7)</option>
+                        </select>
+                    </div>
+                    <button onclick="calculateIncome()">Calculate</button>
+                    <div class="results" id="income-results">
+                        <div class="result-item">
+                            <span class="label">Value 1:</span>
+                            <span class="highlight" id="income-value1">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Value 2:</span>
+                            <span class="highlight" id="income-value2">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Value 3:</span>
+                            <span class="highlight" id="income-value3">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Group:</span>
+                            <span class="highlight" id="income-group">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="development-tab">
+                    <div class="input-group">
+                        <label for="dev-level">Select Level:</label>
+                        <select id="dev-level">
+                            <option value="0">Level 0 (Group 1)</option>
+                            <option value="1">Level 1 (Group 1)</option>
+                            <option value="2">Level 2 (Group 1)</option>
+                            <option value="3">Level 3 (Group 1)</option>
+                            <option value="4">Level 0 (Group 2)</option>
+                            <option value="5">Level 1 (Group 2)</option>
+                            <option value="6">Level 2 (Group 2)</option>
+                            <option value="7">Level 3 (Group 2)</option>
+                            <option value="8">Level 1 (Group 3)</option>
+                            <option value="9">Level 0 (Group 4)</option>
+                            <option value="10">Level 1 (Group 4)</option>
+                        </select>
+                    </div>
+                    <button onclick="calculateDevelopment()">Calculate</button>
+                    <div class="results" id="development-results">
+                        <div class="result-item">
+                            <span class="label">Value 1:</span>
+                            <span class="highlight" id="dev-value1">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Value 2:</span>
+                            <span class="highlight" id="dev-value2">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Group:</span>
+                            <span class="highlight" id="dev-group">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="summary">
+            <h3>Total Costs Summary</h3>
+            <div class="summary-item">
+                <span>Total CHARM Costs:</span>
+                <span id="total-charm-cost">0</span>
+            </div>
+            <div class="summary-item">
+                <span>Total Star Yield Costs:</span>
+                <span id="total-income-cost">0</span>
+            </div>
+            <div class="summary-item">
+                <span>Total Governor Meter Costs:</span>
+                <span id="total-dev-cost">0</span>
+            </div>
+            <div class="summary-item" style="font-weight: bold; border-top: 1px solid white; padding-top: 10px;">
+                <span>Grand Total:</span>
+                <span id="grand-total">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chief CHARM Data
+        const charmData = {
+            1: { guideCost: 5, designCost: 5, stat: "9%" },
+            2: { guideCost: 40, designCost: 15, stat: "12%" },
+            3: { guideCost: 60, designCost: 40, stat: "16%" },
+            4: { guideCost: 80, designCost: 100, stat: "19%" },
+            5: { guideCost: 100, designCost: 200, stat: "25%" },
+            6: { guideCost: 120, designCost: 300, stat: "30%" },
+            7: { guideCost: 140, designCost: 400, stat: "35%" },
+            8: { guideCost: 200, designCost: 400, stat: "40%" },
+            9: { guideCost: 300, designCost: 400, stat: "45%" },
+            10: { guideCost: 420, designCost: 420, stat: "50%" },
+            11: { guideCost: 560, designCost: 420, stat: "55%" },
+            12: { guideCost: 580, designCost: 450, charmSecrets: 15, stat: "64%" },
+            13: { guideCost: 580, designCost: 450, charmSecrets: 30, stat: "73%" },
+            14: { guideCost: 600, designCost: 500, charmSecrets: 45, stat: "82%" },
+            15: { guideCost: 600, designCost: 500, charmSecrets: 70, stat: "91%" },
+            16: { guideCost: 650, designCost: 550, charmSecrets: 100, stat: "100%" }
+        };
+
+        // Star Yield Data
+        const incomeData = [
+            { level: 0, value1: 40, value2: 220, value3: 22000, group: 0 },
+            { level: 1, value1: 40, value2: 230, value3: 23000, group: 0 },
+            { level: 2, value1: 45, value2: 250, value3: 25000, group: 0 },
+            { level: 3, value1: 45, value2: 260, value3: 26000, group: 0 },
+            { level: 0, value1: 45, value2: 280, value3: 28000, group: 1 },
+            { level: 1, value1: 55, value2: 300, value3: 30000, group: 1 },
+            { level: 2, value1: 55, value2: 320, value3: 32000, group: 1 },
+            { level: 3, value1: 55, value2: 340, value3: 35000, group: 1 },
+            { level: 0, value1: 55, value2: 360, value3: 38000, group: 2 },
+            { level: 1, value1: 75, value2: 430, value3: 43000, group: 2 },
+            { level: 2, value1: 80, value2: 460, value3: 45000, group: 2 },
+            { level: 3, value1: 85, value2: 500, value3: 48000, group: 2 },
+            { level: 0, value1: 85, value2: 530, value3: 50000, group: 3 },
+            { level: 1, value1: 90, value2: 560, value3: 52000, group: 3 },
+            { level: 2, value1: 95, value2: 590, value3: 54000, group: 3 },
+            { level: 3, value1: 100, value2: 620, value3: 56000, group: 3 },
+            { level: 0, value1: 110, value2: 670, value3: 59000, group: 4 },
+            { level: 1, value1: 115, value2: 700, value3: 61000, group: 4 },
+            { level: 2, value1: 120, value2: 730, value3: 63000, group: 4 },
+            { level: 3, value1: 125, value2: 760, value3: 65000, group: 4 },
+            { level: 0, value1: 135, value2: 810, value3: 68000, group: 5 },
+            { level: 1, value1: 140, value2: 840, value3: 70000, group: 5 },
+            { level: 2, value1: 145, value2: 870, value3: 72000, group: 5 },
+            { level: 3, value1: 150, value2: 900, value3: 74000, group: 5 },
+            { level: 0, value1: 160, value2: 950, value3: 77000, group: 6 },
+            { level: 1, value1: 165, value2: 990, value3: 80000, group: 6 },
+            { level: 2, value1: 170, value2: 1030, value3: 83000, group: 6 },
+            { level: 3, value1: 180, value2: 1070, value3: 86000, group: 6 }
+        ];
+
+        // Governor Meter Development Data
+        const developmentData = [
+            { level: 0, value1: 15, value2: 1500, group: 0 },
+            { level: 1, value1: 40, value2: 3800, group: 0 },
+            { level: 2, value1: 70, value2: 7000, group: 0 },
+            { level: 3, value1: 95, value2: 9700, group: 0 },
+            { level: 0, value1: 45, value2: null, group: 1 },
+            { level: 1, value1: 50, value2: null, group: 1 },
+            { level: 2, value1: 60, value2: null, group: 1 },
+            { level: 3, value1: 70, value2: null, group: 1 },
+            { level: 0, value1: 40, value2: 6500, group: 2 },
+            { level: 1, value1: 50, value2: 8000, group: 2 },
+            { level: 2, value1: 60, value2: 10000, group: 2 },
+            { level: 3, value1: 70, value2: 11000, group: 2 },
+            { level: 0, value1: 85, value2: 13000, group: 3 },
+            { level: 1, value1: 100, value2: 15000, group: 3 }
+        ];
+
+        // Global variables to track totals
+        let totalCharmCost = 0;
+        let totalIncomeCost = 0;
+        let totalDevCost = 0;
+
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+
+        // Calculate Charm function
+        function calculateCharm() {
+            const level = parseInt(document.getElementById('charm-level').value);
+            const data = charmData[level];
+            
+            document.getElementById('charm-guide-cost').textContent = data.guideCost;
+            document.getElementById('charm-design-cost').textContent = data.designCost;
+            document.getElementById('charm-stat').textContent = data.stat;
+            
+            if (data.charmSecrets) {
+                document.getElementById('charm-secrets').textContent = data.charmSecrets;
+            } else {
+                document.getElementById('charm-secrets').textContent = '-';
+            }
+            
+            // Update total cost
+            totalCharmCost = data.guideCost + data.designCost;
+            updateTotals();
+        }
+
+        // Calculate Income function
+        function calculateIncome() {
+            const selectedIndex = parseInt(document.getElementById('income-level').value);
+            const data = incomeData[selectedIndex];
+            
+            document.getElementById('income-value1').textContent = data.value1;
+            document.getElementById('income-value2').textContent = data.value2;
+            document.getElementById('income-value3').textContent = data.value3;
+            document.getElementById('income-group').textContent = data.group + 1;
+            
+            // Update total cost (using value3 as the cost)
+            totalIncomeCost = data.value3 || 0;
+            updateTotals();
+        }
+
+        // Calculate Development function
+        function calculateDevelopment() {
+            const selectedIndex = parseInt(document.getElementById('dev-level').value);
+            const data = developmentData[selectedIndex];
+            
+            document.getElementById('dev-value1').textContent = data.value1;
+            document.getElementById('dev-group').textContent = data.group + 1;
+            
+            if (data.value2 !== null) {
+                document.getElementById('dev-value2').textContent = data.value2;
+            } else {
+                document.getElementById('dev-value2').textContent = '-';
+            }
+            
+            // Update total cost (using value2 if available, otherwise value1 * 100)
+            totalDevCost = data.value2 !== null ? data.value2 : data.value1 * 100;
+            updateTotals();
+        }
+
+        // Update totals function
+        function updateTotals() {
+            document.getElementById('total-charm-cost').textContent = totalCharmCost;
+            document.getElementById('total-income-cost').textContent = totalIncomeCost;
+            document.getElementById('total-dev-cost').textContent = totalDevCost;
+            
+            const grandTotal = totalCharmCost + totalIncomeCost + totalDevCost;
+            document.getElementById('grand-total').textContent = grandTotal;
+        }
+
+        // Initialize the calculator with default values
+        window.onload = function() {
+            calculateCharm();
+            calculateIncome();
+            calculateDevelopment();
+        };
+    </script>
+</body>
+</html>
